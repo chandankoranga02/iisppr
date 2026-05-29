@@ -5,9 +5,10 @@ import { Page } from './Page';
 
 // Subcomponent to adhere to React Rules of Hooks (hooks must not be called inside loops)
 const NavigationDot = ({ idx, totalSheets, smoothProgress, scrollToPercent }) => {
-  const step = 1 / (totalSheets - 1);
+  // Correctly aligned step intervals matching the 5 page transition zones (size 0.2 each)
+  const step = 1 / totalSheets;
   const targetPercent = idx * step;
-  const label = idx === 0 ? "Cover" : idx === totalSheets - 1 ? "End" : `Ch.${idx}`;
+  const label = idx === 0 ? "Cover" : idx === totalSheets ? "End" : `Ch.${idx}`;
 
   const backgroundColor = useTransform(
     smoothProgress,
@@ -244,7 +245,7 @@ export const Book = () => {
           <div className="glass-panel py-3 px-6 sm:px-8 rounded-full flex items-center justify-between gap-6 max-w-xl w-full pointer-events-auto">
             {/* Scroll indicators / Dots */}
             <div className="flex items-center gap-5 sm:gap-6">
-              {Array.from({ length: totalSheets }).map((_, idx) => (
+              {Array.from({ length: totalSheets + 1 }).map((_, idx) => (
                 <NavigationDot 
                   key={idx}
                   idx={idx}

@@ -11,9 +11,13 @@ export const Page = ({ index, totalSheets, smoothProgress, bookContent }) => {
   const end = (index + 1) * step;
   const mid = start + step / 2;
 
-  // Map scroll progress to a -180 degree rotation for the page turn
-  const rotateY = useTransform(smoothProgress, [start, end], [0, -180], {
-    clamp: true,
+  // Strict, mathematical angle mapping to ensure only the active page rotates.
+  // Inactive pages are perfectly locked at 0deg or -180deg to prevent stack drift.
+  const rotateY = useTransform(smoothProgress, (val) => {
+    if (val <= start) return 0;
+    if (val >= end) return -180;
+    const ratio = (val - start) / (end - start);
+    return -180 * ratio;
   });
 
   // Calculate dynamic z-index to prevent 3D clipping
@@ -79,18 +83,18 @@ export const Page = ({ index, totalSheets, smoothProgress, bookContent }) => {
     [30, -30]
   );
 
-  // Corner Hover Interaction
-  // Tilts page by a tiny angle to invite click/scroll
-  const hoverRotateY = isHovered ? -4 : 0;
-  const hoverTranslateZ = isHovered ? 15 : 0;
+  // Hover status tracking
 
   // Retrieve current content items
   const isCover = index === 0;
   const isBackCover = index === totalSheets - 1;
 
-  // Contents
-  const leftContent = !isCover ? bookContent[index - 1] : null;
-  const rightContent = !isBackCover ? bookContent[index] : null;
+  // Contents Mapping
+  // Sheet i Back Face displays bookContent[i] (Left Page of Spread i + 1)
+  const leftContent = !isBackCover ? bookContent[index] : null;
+  
+  // Sheet i Front Face displays bookContent[i - 1] (Right Page of Spread i)
+  const rightContent = !isCover ? bookContent[index - 1] : null;
 
   return (
     <>
@@ -118,7 +122,7 @@ export const Page = ({ index, totalSheets, smoothProgress, bookContent }) => {
         className="absolute top-0 left-0 w-1/2 h-full pointer-events-none bg-gradient-to-l from-black/80 via-black/40 to-transparent blur-md z-0"
       />
 
-      {/* Main Flipping Sheet Component */}
+      {/* Main Flipping Sheet Component (Pure scroll control, no hover / animate conflicts) */}
       <motion.div
         style={{
           rotateY,
@@ -127,23 +131,34 @@ export const Page = ({ index, totalSheets, smoothProgress, bookContent }) => {
           zIndex,
           transformOrigin: 'left center',
         }}
-        animate={{
-          rotateY: rotateY.get() + hoverRotateY,
-          translateZ: translateZ.get() + hoverTranslateZ
-        }}
-        onMouseEnter={() => {
-          // Only trigger hover on unflipped right page stack
-          if (smoothProgress.get() < start) {
-            setIsHovered(true);
-          }
-        }}
-        onMouseLeave={() => setIsHovered(false)}
         className="absolute top-0 right-0 w-1/2 h-full preserve-3d transition-shadow duration-300 pointer-events-auto"
       >
         {/* ======================================================== */}
         {/* FRONT OF THE SHEET (Visible on the Right side of spread) */}
         {/* ======================================================== */}
-        <div className="absolute inset-0 backface-hidden bg-[#0d121f] rounded-r-2xl border-y border-r border-slate-800/40 shadow-page-3d overflow-hidden flex flex-col z-10 preserve-3d">
+        <motion.div 
+          style={{ transformOrigin: 'left center' }}
+          animate={isHovered ? {
+            rotateY: -3.5,
+            translateZ: 12,
+            boxShadow: "0 15px 35px -5px rgba(0, 0, 0, 0.65), inset 0 0 15px rgba(0,0,0,0.15)"
+          } : {
+            rotateY: 0,
+            translateZ: 0,
+            boxShadow: "0 10px 30px -5px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0,0,0,0.1)"
+          }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          onMouseEnter={() => {
+            const currentProgress = smoothProgress.get();
+            const activeIndex = Math.min(totalSheets - 1, Math.floor(currentProgress * totalSheets));
+            // Hover only the active top page on the right stack when flat
+            if (index === activeIndex && currentProgress <= start) {
+              setIsHovered(true);
+            }
+          }}
+          onMouseLeave={() => setIsHovered(false)}
+          className="absolute inset-0 backface-hidden bg-[#0d121f] rounded-r-2xl border-y border-r border-slate-800/40 shadow-page-3d overflow-hidden flex flex-col z-10 preserve-3d cursor-pointer"
+        >
           
           {/* Static creasing shadow gradient inside the page fold seam */}
           <div className="absolute inset-y-0 left-0 w-16 page-crease-right pointer-events-none z-30" />
@@ -262,7 +277,7 @@ export const Page = ({ index, totalSheets, smoothProgress, bookContent }) => {
               <div className="absolute bottom-0 right-0 w-6 h-6 bg-slate-200/30 rounded-br-2xl pointer-events-none" />
             </div>
           )}
-        </div>
+        </motion.div>
 
         {/* ======================================================= */}
         {/* BACK OF THE SHEET (Visible on the Left side when flipped) */}
