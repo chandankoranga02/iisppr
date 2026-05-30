@@ -365,12 +365,95 @@ export const Page = ({ index, totalSheets, smoothProgress, bookContent }) => {
                 <img 
                   src={leftContent.image} 
                   alt={leftContent.title} 
-                  className="w-full h-full object-cover select-none filter brightness-[0.55] contrast-[1.08] saturate-[0.85]"
+                  className="w-full h-full object-cover select-none filter brightness-[0.5] contrast-[1.08] saturate-[0.8]"
                 />
                 {/* Ambient dark vignette styling */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#080b11] via-transparent to-[#080b11]/30 z-10" />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#080b11]/60 via-transparent to-transparent z-10" />
               </motion.div>
+
+              {/* Dynamic Infographics and Policy Diagrams Overlay */}
+              {leftContent.id === 1 && (
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                  <div className="w-36 h-36 rounded-full border border-[var(--color-gold)]/20 flex items-center justify-center" style={{ animation: 'spin 25s linear infinite' }}>
+                    <div className="w-28 h-28 rounded-full border border-dashed border-[var(--color-gold)]/30 flex items-center justify-center">
+                      <Compass className="w-10 h-10 text-[var(--color-gold)]/40 stroke-[0.8]" />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {leftContent.id === 2 && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10">
+                  <div className="relative w-36 h-36 flex items-center justify-center">
+                    <div className="absolute inset-0 rounded-full border-4 border-slate-800/80" />
+                    <div className="absolute inset-0 rounded-full border-4 border-t-[var(--color-gold)] border-r-[var(--color-gold)] border-b-[var(--color-gold)]/30 animate-pulse shadow-[0_0_20px_rgba(223,194,125,0.15)]" />
+                    <div className="text-center">
+                      <span className="font-display text-4xl font-extrabold tracking-tight text-white block">17</span>
+                      <span className="font-display text-[8px] uppercase tracking-widest text-[var(--color-gold)] font-bold">UN Goals</span>
+                    </div>
+                  </div>
+                  <div className="glass-panel py-1 px-3 rounded-full border-white/10 mt-3 text-[9px] font-display text-slate-350 tracking-wider">
+                    SDG Index: <span className="text-[var(--color-gold)] font-bold">96.8%</span>
+                  </div>
+                </div>
+              )}
+
+              {leftContent.id === 3 && (
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 p-6">
+                  <div className="glass-panel p-4 rounded-xl border-white/10 max-w-[200px] w-full bg-[#0a0f1d]/75 shadow-2xl relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--color-gold)]/5 rounded-bl-full pointer-events-none" />
+                    <div className="flex items-center gap-1.5 mb-2.5">
+                      <FileText className="w-3.5 h-3.5 text-[var(--color-gold)]" />
+                      <span className="font-display text-[8px] uppercase tracking-widest text-slate-400 font-bold">JOURNAL INDEX</span>
+                    </div>
+                    <div className="h-1.5 w-12 bg-[var(--color-gold)]/60 rounded mb-2" />
+                    <div className="h-1 w-24 bg-slate-700/60 rounded mb-1" />
+                    <div className="h-1 w-20 bg-slate-700/60 rounded mb-1" />
+                    <div className="h-1 w-16 bg-slate-700/60 rounded mb-3" />
+                    <div className="flex justify-between items-center border-t border-slate-800/80 pt-2 mt-2 text-[8px] font-display text-slate-500">
+                      <span>ISSN: 2471-9312</span>
+                      <span className="text-[var(--color-gold)] font-semibold">APPROVED</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {leftContent.id === 4 && (
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                  <div className="relative w-44 h-32 flex items-center justify-center">
+                    <div className="absolute top-0 left-6 w-8 h-8 rounded-full bg-[#0d121f]/80 border border-[var(--color-gold)]/40 flex items-center justify-center text-[9px] text-[var(--color-gold)] font-bold shadow-md">GOV</div>
+                    <div className="absolute bottom-2 left-2 w-8 h-8 rounded-full bg-[#0d121f]/80 border border-slate-700 flex items-center justify-center text-[9px] text-slate-400 font-bold shadow-md">ORG</div>
+                    <div className="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-[#0d121f]/80 border border-slate-700 flex items-center justify-center text-[9px] text-slate-400 font-bold shadow-md">COM</div>
+                    <div className="w-12 h-12 rounded-full bg-[var(--color-gold)] text-[#0d121f] flex items-center justify-center text-xs font-bold shadow-lg shadow-[var(--color-gold)]/20 z-10">POLICY</div>
+                    
+                    <svg className="absolute inset-0 w-full h-full opacity-40 animate-pulse" stroke="rgba(223,194,125,0.4)" strokeWidth="1">
+                      <line x1="88" y1="64" x2="48" y2="28" />
+                      <line x1="88" y1="64" x2="40" y2="108" />
+                      <line x1="88" y1="64" x2="136" y2="108" />
+                    </svg>
+                  </div>
+                </div>
+              )}
+
+              {leftContent.id === 5 && (
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 p-6">
+                  <div className="flex flex-col gap-2 w-full max-w-[180px]">
+                    <div className="glass-panel p-2 rounded-lg border-white/5 bg-[#0a0f1d]/60 flex items-center gap-3">
+                      <div className="w-4 h-4 rounded bg-[var(--color-gold)]/20 flex items-center justify-center text-[9px] font-bold text-[var(--color-gold)]">01</div>
+                      <span className="font-display text-[8px] uppercase tracking-widest text-slate-350 font-semibold">Leadership Core</span>
+                    </div>
+                    <div className="glass-panel p-2 rounded-lg border-white/5 bg-[#0a0f1d]/60 flex items-center gap-3 ml-3">
+                      <div className="w-4 h-4 rounded bg-[var(--color-gold)]/20 flex items-center justify-center text-[9px] font-bold text-[var(--color-gold)]">02</div>
+                      <span className="font-display text-[8px] uppercase tracking-widest text-slate-350 font-semibold">Mentorship Node</span>
+                    </div>
+                    <div className="glass-panel p-2 rounded-lg border-white/5 bg-[#0a0f1d]/60 flex items-center gap-3 ml-6">
+                      <div className="w-4 h-4 rounded bg-[var(--color-gold)]/20 flex items-center justify-center text-[9px] font-bold text-[var(--color-gold)]">03</div>
+                      <span className="font-display text-[8px] uppercase tracking-widest text-slate-350 font-semibold">Field Exposure</span>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Overlay HUD metrics and labels */}
               <div className="relative z-20 p-8 sm:p-12 flex flex-col justify-between h-full">
@@ -394,10 +477,18 @@ export const Page = ({ index, totalSheets, smoothProgress, bookContent }) => {
                   {/* Floating Glassmorphic Caption Card */}
                   <div className="glass-panel p-4 rounded-xl border-white/10 max-w-xs mt-[-2rem] ml-4 bg-[#0a0f1d]/50">
                     <span className="font-display text-[9px] uppercase tracking-[0.25em] text-[var(--color-gold)] font-bold mb-1 block">
-                      Core Blueprint
+                      {leftContent.id === 1 && "ABOUT IISPPR"}
+                      {leftContent.id === 2 && "UN ACCREDITATION"}
+                      {leftContent.id === 3 && "SCHOLARLY REVIEW"}
+                      {leftContent.id === 4 && "POLICY SYSTEM"}
+                      {leftContent.id === 5 && "LEARNING PATH"}
                     </span>
                     <p className="font-display text-[11px] leading-relaxed text-slate-300 font-light">
-                      Localized sustainable development goals policy blueprint and framework visual fragment.
+                      {leftContent.id === 1 && "Rigorous research, education, policy studies, and community engagement blueprints."}
+                      {leftContent.id === 2 && "Quality education, poverty eradication, environmental preservation, and social parity metrics."}
+                      {leftContent.id === 3 && "Scholarly journals, interdisciplinary research papers, and evidentiary guidelines."}
+                      {leftContent.id === 4 && "Innovation-driven diagrams, public policy nodes, and governance frameworks."}
+                      {leftContent.id === 5 && "Mentorship networks, student internships, and career training pathways."}
                     </p>
                   </div>
                 </div>

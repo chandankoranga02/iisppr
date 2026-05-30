@@ -45,11 +45,11 @@ function App() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-center gap-2.5 z-10 glass-panel py-1.5 px-4 rounded-full border-white/5"
+          className="flex items-center gap-2.5 z-10 glass-panel py-1.5 px-4 rounded-full border-white/5 font-display text-[9px] uppercase tracking-[0.25em] font-semibold text-slate-350"
         >
           <Compass className="w-4 h-4 text-[var(--color-gold)] stroke-[1.5]" />
-          <span className="font-display text-[9px] uppercase tracking-[0.25em] font-semibold text-slate-300">
-            IISPPR Showcase Portal
+          <span>
+            IISPPR RESEARCH JOURNAL
           </span>
         </motion.div>
 
@@ -73,8 +73,8 @@ function App() {
             transition={{ duration: 1.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="font-editorial text-5xl sm:text-7xl lg:text-[5.5rem] font-light leading-[1.05] tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-slate-500 max-w-4xl"
           >
-            Transforming Research <br />
-            Into <span className="italic font-normal text-[var(--color-gold)]">Impact</span>
+            Research For <br />
+            Sustainable <span className="italic font-normal text-[var(--color-gold)]">Impact</span>
           </motion.h1>
           
           <motion.div 
@@ -94,17 +94,27 @@ function App() {
             Explore research, public policy insights, sustainable development goals, and innovative initiatives driving positive social change across communities.
           </motion.p>
 
-          {/* Action button triggers smooth scroll to Book */}
-          <motion.button
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+          {/* Dual Action CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            onClick={scrollToBook}
-            className="group relative px-8 py-4 bg-transparent text-[var(--color-gold)] border border-[var(--color-gold)]/40 rounded-full font-display text-xs uppercase tracking-[0.2em] font-semibold overflow-hidden transition-all duration-300 hover:text-[#05070a] hover:border-[var(--color-gold)] hover:shadow-[0_0_40px_rgba(223,194,125,0.25)] pointer-events-auto cursor-pointer"
+            className="flex flex-col sm:flex-row items-center gap-4 z-10 pointer-events-auto"
           >
-            <div className="absolute inset-0 bg-[var(--color-gold)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left -z-10" />
-            Explore Research
-          </motion.button>
+            <button
+              onClick={scrollToBook}
+              className="group relative px-8 py-4 bg-[var(--color-gold)] text-[#05070a] border border-[var(--color-gold)] rounded-full font-display text-xs uppercase tracking-[0.2em] font-semibold overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(223,194,125,0.3)] hover:bg-transparent hover:text-[var(--color-gold)] cursor-pointer"
+            >
+              Explore Research
+            </button>
+            <button
+              onClick={() => window.open('mailto:publications@iisppr.org', '_blank')}
+              className="group relative px-8 py-4 bg-transparent text-[var(--color-gold)] border border-[var(--color-gold)]/45 rounded-full font-display text-xs uppercase tracking-[0.2em] font-semibold overflow-hidden transition-all duration-300 hover:text-[#05070a] hover:border-[var(--color-gold)] hover:shadow-[0_0_40px_rgba(223,194,125,0.2)] cursor-pointer"
+            >
+              <div className="absolute inset-0 bg-[var(--color-gold)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left -z-10" />
+              View Publications
+            </button>
+          </motion.div>
         </div>
 
         {/* Dynamic Scroll Prompt Indicator */}
@@ -150,7 +160,7 @@ function App() {
         {/* Epilogue CTA Card */}
         <div className="flex flex-col items-center justify-center z-10 my-auto">
           <span className="font-display text-[10px] uppercase tracking-[0.3em] text-[var(--color-gold)] font-bold mb-6 block">
-            EPILOGUE
+            IISPPR
           </span>
           
           <h2 className="font-editorial text-4xl sm:text-6xl font-light leading-none text-white tracking-wide max-w-2xl mb-8">
@@ -158,8 +168,8 @@ function App() {
             <span className="italic font-normal text-[var(--color-gold)]">Future Together</span>
           </h2>
           
-          <p className="font-display text-sm text-slate-400 max-w-md font-light leading-relaxed tracking-wider mb-10">
-            Join hands with IISPPR in promoting research, sustainability, and public policy initiatives that create lasting positive impact.
+          <p className="font-display text-sm text-slate-400 max-w-2xl font-light leading-relaxed tracking-wider mb-10 px-4">
+            Join hands with IISPPR in promoting research, sustainability, and public policy initiatives that create lasting positive impact for communities around the world.
           </p>
 
           {/* Collaborative Mail Button */}
@@ -174,9 +184,12 @@ function App() {
         </div>
 
         {/* Copyright and signature */}
-        <div className="flex flex-col items-center gap-3 z-10">
+        <div className="flex flex-col items-center gap-2 z-10">
           <span className="font-display text-[9px] uppercase tracking-[0.25em] text-slate-500 font-semibold">
             IISPPR © 2026
+          </span>
+          <span className="font-display text-[9px] uppercase tracking-[0.15em] text-[var(--color-gold)]/60 font-semibold">
+            Prototype Interactive Publication Experience
           </span>
           <div className="w-[1px] h-6 bg-gradient-to-b from-slate-800 to-transparent" />
         </div>

@@ -21,7 +21,7 @@ export const bookContent = [
     chapter: "CHAPTER I",
     title: "About IISPPR",
     subtitle: "Advancing Global Sustainability",
-    content: "The International Institute of SDGs & Public Policy Research is committed to advancing sustainable development through rigorous research, public policy analysis, innovative education models, and collaborative community engagement. The institute actively works towards creating meaningful social impact by addressing contemporary global challenges through evidence-based insights.",
+    content: "The International Institute of SDGs & Public Policy Research is dedicated to advancing sustainable development through research, education, policy analysis, and community engagement. The institute works to create meaningful social impact by addressing contemporary global challenges.",
     icon: <Globe className="w-10 h-10 text-[var(--color-gold)] mb-4 stroke-[1.2]" />,
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop",
     quote: "Bridging the gap between empirical science and public welfare."
@@ -29,9 +29,9 @@ export const bookContent = [
   {
     id: 2,
     chapter: "CHAPTER II",
-    title: "Sustainable Goals",
+    title: "Sustainable Development Goals",
     subtitle: "United Nations SDG Alignment",
-    content: "IISPPR aligns its core research initiatives and community outreach with the United Nations Sustainable Development Goals (SDGs). By focusing on educational equity, poverty reduction, gender equality, environmental sustainability, and inclusive industrial growth, we translate global targets into localized, actionable strategies.",
+    content: "IISPPR aligns its initiatives with the United Nations Sustainable Development Goals (SDGs), focusing on quality education, poverty reduction, gender equality, environmental sustainability, and inclusive development.",
     icon: <Shield className="w-10 h-10 text-[var(--color-gold)] mb-4 stroke-[1.2]" />,
     image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1600&auto=format&fit=crop",
     quote: "Advancing the 2030 Agenda through localized research."
@@ -39,9 +39,9 @@ export const bookContent = [
   {
     id: 3,
     chapter: "CHAPTER III",
-    title: "Research & Journals",
+    title: "Research & Publications",
     subtitle: "Evidence-Based Policy Making",
-    content: "The institute promotes high-quality academic research and encourages evidence-based policy making through scholarly journals, extensive reports, policy briefs, case studies, and interdisciplinary research projects. We provide researchers, scientists, and analysts a premium platform to publish findings that shape public guidelines.",
+    content: "The institute promotes high-quality academic research and evidence-based policy making through journals, reports, case studies, and interdisciplinary projects that contribute to societal development.",
     icon: <BookOpen className="w-10 h-10 text-[var(--color-gold)] mb-4 stroke-[1.2]" />,
     image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=1600&auto=format&fit=crop",
     quote: "Encouraging rigorous scholarship for modern policy challenges."
@@ -49,9 +49,9 @@ export const bookContent = [
   {
     id: 4,
     chapter: "CHAPTER IV",
-    title: "Policy & Innovation",
+    title: "Public Policy & Innovation",
     subtitle: "Designing Strategic Solutions",
-    content: "Through policy research, collaborative focus groups, and innovation-driven digital solutions, IISPPR actively supports governments, non-profit organizations, and local communities in designing, deploying, and evaluating effective strategies that ensure long-term, equitable, and sustainable regional development.",
+    content: "Through policy research and innovation-driven solutions, IISPPR supports governments, organizations, and communities in designing effective strategies for sustainable and equitable development.",
     icon: <Landmark className="w-10 h-10 text-[var(--color-gold)] mb-4 stroke-[1.2]" />,
     image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=1600&auto=format&fit=crop",
     quote: "Transforming governance through scientific insight and technology."
@@ -61,7 +61,7 @@ export const bookContent = [
     chapter: "CHAPTER V",
     title: "Internships & Learning",
     subtitle: "Empowering Tomorrow's Leaders",
-    content: "Students and young professionals gain practical, real-world exposure through IISPPR's immersive internships, collaborative policy projects, international leadership opportunities, and structured mentorship programs. We foster critical thinking and professional research skills to nurture the next generation of global policy makers.",
+    content: "Students gain practical exposure through internships, collaborative projects, leadership opportunities, mentorship programs, and research-based learning experiences.",
     icon: <GraduationCap className="w-10 h-10 text-[var(--color-gold)] mb-4 stroke-[1.2]" />,
     image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop",
     quote: "Developing visual and empirical skills for leadership."

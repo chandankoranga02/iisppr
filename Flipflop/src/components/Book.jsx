@@ -138,11 +138,11 @@ export const Book = () => {
           <div className="flex items-center gap-3">
             <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
             <span className="font-display text-xs uppercase tracking-[0.25em] text-slate-400 font-semibold">
-              The Digital Chronicles
+              IISPPR DIGITAL PUBLICATIONS
             </span>
           </div>
-          <span className="font-editorial italic text-sm text-[var(--color-gold)]/60">
-            A Cinematic Scroll Narrative
+          <span className="font-display text-xs uppercase tracking-[0.2em] text-[var(--color-gold)]/80 font-medium">
+            Research • Policy • Sustainability
           </span>
         </div>
 
