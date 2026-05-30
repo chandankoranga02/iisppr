@@ -1,45 +1,69 @@
-import { BookOpen, Lightbulb, Rocket, Zap } from 'lucide-react';
+import { Globe, Shield, BookOpen, Landmark, GraduationCap } from 'lucide-react';
 import React from 'react';
 
+/**
+ * ========================================================
+ * BOOK CONTENT DATA - IISPPR RESEARCH SHOWCASE
+ * ========================================================
+ * This data array drives the page spreads of the interactive 3D book.
+ * Each object represents one editorial chapter or section:
+ * - chapter: The Roman numeral chapter label.
+ * - title: Large serif title for the editorial page.
+ * - subtitle: Small gold tagline outlining the topic.
+ * - content: Refined copy representing IISPPR's initiatives.
+ * - icon: Lucide-react component styled with the gold theme.
+ * - image: Curated, high-resolution Unsplash photo with dark academic tones.
+ * - quote: Majestic blockquote that fits underneath the body text.
+ */
 export const bookContent = [
   {
     id: 1,
     chapter: "CHAPTER I",
-    title: "The Genesis",
-    subtitle: "A New Chapter in Digital Experience",
-    content: "We believe that interacting with the digital world should feel natural, immersive, and fundamentally beautiful. This journey begins by reimagining the boundaries of the web, blending physical interaction with state-of-the-art visual craftsmanship.",
-    icon: <BookOpen className="w-10 h-10 text-[var(--color-gold)] mb-4 stroke-[1.5]" />,
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop",
-    quote: "A perfect blend of technology and human touch."
+    title: "About IISPPR",
+    subtitle: "Advancing Global Sustainability",
+    content: "The International Institute of SDGs & Public Policy Research is committed to advancing sustainable development through rigorous research, public policy analysis, innovative education models, and collaborative community engagement. The institute actively works towards creating meaningful social impact by addressing contemporary global challenges through evidence-based insights.",
+    icon: <Globe className="w-10 h-10 text-[var(--color-gold)] mb-4 stroke-[1.2]" />,
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop",
+    quote: "Bridging the gap between empirical science and public welfare."
   },
   {
     id: 2,
     chapter: "CHAPTER II",
-    title: "Research & Insights",
-    subtitle: "Data-Driven Aesthetics",
-    content: "Beneath every stunning interface lies a foundation of rigorous cognitive research. We analyze human scroll behavior and visual stress thresholds to craft layouts that feel intuitive, elegant, and perfectly balanced to the eye.",
-    icon: <Lightbulb className="w-10 h-10 text-[var(--color-gold)] mb-4 stroke-[1.5]" />,
-    image: "https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?q=80&w=1600&auto=format&fit=crop",
-    quote: "Designing for the subconscious mind."
+    title: "Sustainable Goals",
+    subtitle: "United Nations SDG Alignment",
+    content: "IISPPR aligns its core research initiatives and community outreach with the United Nations Sustainable Development Goals (SDGs). By focusing on educational equity, poverty reduction, gender equality, environmental sustainability, and inclusive industrial growth, we translate global targets into localized, actionable strategies.",
+    icon: <Shield className="w-10 h-10 text-[var(--color-gold)] mb-4 stroke-[1.2]" />,
+    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1600&auto=format&fit=crop",
+    quote: "Advancing the 2030 Agenda through localized research."
   },
   {
     id: 3,
     chapter: "CHAPTER III",
-    title: "Innovation Engine",
-    subtitle: "Pushing the Envelope",
-    content: "By leveraging modern GPU capabilities, dynamic spring equations, and hardware acceleration, we transform static elements into living web experiences. We don't build pages; we build responsive digital ecosystems.",
-    icon: <Rocket className="w-10 h-10 text-[var(--color-gold)] mb-4 stroke-[1.5]" />,
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop",
-    quote: "Fluid movement is the language of the modern web."
+    title: "Research & Journals",
+    subtitle: "Evidence-Based Policy Making",
+    content: "The institute promotes high-quality academic research and encourages evidence-based policy making through scholarly journals, extensive reports, policy briefs, case studies, and interdisciplinary research projects. We provide researchers, scientists, and analysts a premium platform to publish findings that shape public guidelines.",
+    icon: <BookOpen className="w-10 h-10 text-[var(--color-gold)] mb-4 stroke-[1.2]" />,
+    image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=1600&auto=format&fit=crop",
+    quote: "Encouraging rigorous scholarship for modern policy challenges."
   },
   {
     id: 4,
     chapter: "CHAPTER IV",
-    title: "The Future is Now",
-    subtitle: "Unleashing Performance",
-    content: "Uncompromised performance is the cornerstone of premium experiences. Our architectures are engineered from the ground up to render at 60 frames per second, ensuring high-fidelity interaction on any device.",
-    icon: <Zap className="w-10 h-10 text-[var(--color-gold)] mb-4 stroke-[1.5]" />,
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop",
-    quote: "Speed is the ultimate canvas of design."
+    title: "Policy & Innovation",
+    subtitle: "Designing Strategic Solutions",
+    content: "Through policy research, collaborative focus groups, and innovation-driven digital solutions, IISPPR actively supports governments, non-profit organizations, and local communities in designing, deploying, and evaluating effective strategies that ensure long-term, equitable, and sustainable regional development.",
+    icon: <Landmark className="w-10 h-10 text-[var(--color-gold)] mb-4 stroke-[1.2]" />,
+    image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=1600&auto=format&fit=crop",
+    quote: "Transforming governance through scientific insight and technology."
+  },
+  {
+    id: 5,
+    chapter: "CHAPTER V",
+    title: "Internships & Learning",
+    subtitle: "Empowering Tomorrow's Leaders",
+    content: "Students and young professionals gain practical, real-world exposure through IISPPR's immersive internships, collaborative policy projects, international leadership opportunities, and structured mentorship programs. We foster critical thinking and professional research skills to nurture the next generation of global policy makers.",
+    icon: <GraduationCap className="w-10 h-10 text-[var(--color-gold)] mb-4 stroke-[1.2]" />,
+    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop",
+    quote: "Developing visual and empirical skills for leadership."
   }
 ];
