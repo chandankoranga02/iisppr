@@ -160,13 +160,17 @@ function IISPPRLogo({ size = 1, color = "#f5f0e8", compact = false }) {
       <defs>
         {/* Arc path for the arched text */}
         <path id="logo-text-path" d="M 24,64 A 36,36 0 0,1 96,64" fill="none" />
+        {/* Clip path to keep continent lines inside the globe */}
+        <clipPath id="globe-clip">
+          <circle cx="60" cy="68" r="22.75" />
+        </clipPath>
       </defs>
 
       {/* Laurel Wreath in green */}
       <g stroke="#82c341" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.9">
-        {/* Stems */}
-        <path d="M 60,105 C 40,105 26,90 26,65 C 26,55 30,45 34,40" strokeWidth="1.2" />
-        <path d="M 60,105 C 80,105 94,90 94,65 C 94,55 90,45 86,40" strokeWidth="1.2" />
+        {/* Stems (Crossed smoothly at the bottom) */}
+        <path d="M 34,40 C 30,45 26,55 26,65 C 26,90 40,105 60,105 C 61.2,105 62.4,105.5 63.5,106.5" strokeWidth="1.2" />
+        <path d="M 86,40 C 90,45 94,55 94,65 C 94,90 80,105 60,105 C 58.8,105 57.6,105.5 56.5,106.5" strokeWidth="1.2" />
       </g>
 
       {/* Laurel Leaves (Filled green) */}
@@ -199,8 +203,8 @@ function IISPPRLogo({ size = 1, color = "#f5f0e8", compact = false }) {
         {/* Globe outer circle */}
         <circle cx="60" cy="68" r="24" fill="#0f0c08" stroke="#38bdf8" strokeWidth="2.5" />
         
-        {/* Continent Lines */}
-        <g stroke="#38bdf8" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.95">
+        {/* Continent Lines (Clipped inside the globe) */}
+        <g clipPath="url(#globe-clip)" stroke="#38bdf8" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.95">
           <path d="M 44,56 C 47,54 50,56 52,52 C 54,48 50,46 54,46 C 58,46 60,50 63,48 C 65,46 62,44 60,44 C 58,44 56,42 58,40" />
           <path d="M 52,68 C 48,68 44,72 44,76 C 44,80 48,84 52,86 C 56,88 56,92 60,92" />
           <path d="M 64,60 C 68,60 70,64 74,62 C 78,60 76,56 78,54 C 80,52 82,56 80,60 C 78,64 74,68 76,72 C 78,76 82,74 84,78 C 86,82 82,88 78,88 C 74,88 72,82 68,82 C 64,82 64,74 60,74" />
