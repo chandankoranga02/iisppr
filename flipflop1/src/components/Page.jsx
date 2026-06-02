@@ -1,5 +1,6 @@
 import React from "react";
 import IISPPRLogo from "./IISPPRLogo";
+import { PAGES } from "../data/bookContent";
 
 function GeometryVisual({ accent }) {
   return (
@@ -69,6 +70,22 @@ function PageVisual({ type, accent }) {
   return null;
 }
 
+function getChapterQuote(chapter) {
+  if (chapter === "Chapter I") {
+    return "Rigorous scientific investigation is the core empirical framework upon which human progress is sustained.";
+  }
+  if (chapter === "Chapter II") {
+    return "Systems and frameworks bridge the gap between academic data insights and implementable public policies.";
+  }
+  if (chapter === "Chapter III") {
+    return "Sustainable solutions have no borders. Empirical evidence connects local actions with global metrics.";
+  }
+  if (chapter === "Chapter IV") {
+    return "True impact is measured in real-world governance, ecological preservation, and societal progress.";
+  }
+  return "";
+}
+
 function CoverPage({ page, logoLanded }) {
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center px-10"
@@ -88,7 +105,11 @@ function CoverPage({ page, logoLanded }) {
       </div>
       <div className="relative z-10 text-center flex flex-col items-center">
         <div style={{
-          width: 72, height: 72,
+          width: 72,
+          height: 72,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           opacity: logoLanded ? 1 : 0,
           transform: logoLanded ? "scale(1)" : "scale(0.5)",
           transition: "opacity 0.4s ease, transform 0.4s ease",
@@ -140,11 +161,16 @@ function IntroPage({ page }) {
           <p style={{ fontSize: "0.65rem", opacity: 0.4, letterSpacing: "0.05em" }}>{page.quoteAuthor}</p>
         </div>
       </div>
+      <div className="flex justify-between items-end">
+        <span style={{ fontSize: "0.65rem", opacity: 0.3, fontFamily: "Georgia, serif" }}>1</span>
+        <div style={{ height: 1, width: 24, opacity: 0.15, background: page.textColor }} />
+      </div>
     </div>
   );
 }
 
 function ContentPage({ page }) {
+  const pageNum = (page.id - 1) * 2 + 1;
   return (
     <div className="absolute inset-0 flex flex-col" style={{ background: page.bg, color: page.textColor }}>
       <div className="absolute right-0 top-0 bottom-0 w-1/2 flex items-center justify-center p-8 opacity-60">
@@ -165,8 +191,8 @@ function ContentPage({ page }) {
           </p>
         </div>
         <div className="flex justify-between items-end">
-          <span style={{ fontSize: "0.6rem", opacity: 0.2, letterSpacing: "0.1em" }}>{page.id}</span>
-          <div style={{ height: 1, width: 24, opacity: 0.2, background: page.textColor }} />
+          <span style={{ fontSize: "0.65rem", opacity: 0.3, fontFamily: "Georgia, serif" }}>{pageNum}</span>
+          <div style={{ height: 1, width: 24, opacity: 0.15, background: page.textColor }} />
         </div>
       </div>
     </div>
@@ -200,8 +226,107 @@ function EndPage({ page }) {
   );
 }
 
+function LeftPageContent({ currentPage, nextPage }) {
+  if (!nextPage) {
+    // Back cover / inside back page
+    return (
+      <div className="absolute inset-0 flex flex-col items-center justify-center p-10"
+        style={{ background: "#0f0c08", color: "#f5f0e8" }}>
+        <div style={{ opacity: 0.25, transform: "scale(0.8)" }}>
+          <IISPPRLogo size={1.0} color="#C8A96E" compact />
+        </div>
+      </div>
+    );
+  }
+
+  const pageNum = (nextPage.id - 1) * 2;
+
+  if (nextPage.type === "intro") {
+    // Left page for Preface
+    return (
+      <div className="absolute inset-0 flex flex-col justify-between p-12"
+        style={{ background: nextPage.bg, color: nextPage.textColor }}>
+        <div className="flex justify-between items-start">
+          <span style={{ fontSize: "0.6rem", letterSpacing: "0.2em", opacity: 0.3, textTransform: "uppercase" }}>IISPPR Charter</span>
+          <span style={{ fontSize: "0.6rem", letterSpacing: "0.2em", opacity: 0.3 }}>EST. 2019</span>
+        </div>
+        <div className="flex-1 flex flex-col justify-center">
+          <div style={{ width: 32, height: 1, background: nextPage.accent, marginBottom: 16, opacity: 0.5 }} />
+          <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "1.3rem", fontWeight: 300, color: nextPage.accent, fontStyle: "italic", marginBottom: 12 }}>
+            "Veritas et Progressus"
+          </h3>
+          <p style={{ fontFamily: "'EB Garamond', Georgia, serif", fontSize: "0.8rem", lineHeight: 1.6, opacity: 0.55 }}>
+            Our research architecture is dedicated to building policy frameworks that drive structural sustainable progress across all nations.
+          </p>
+        </div>
+        <div style={{ height: 1, width: "100%", background: nextPage.textColor, opacity: 0.1 }} />
+      </div>
+    );
+  }
+
+  if (nextPage.type === "content") {
+    // Left page for Chapter I, II, III, IV
+    return (
+      <div className="absolute inset-0 flex flex-col justify-between p-12"
+        style={{ background: nextPage.bg, color: nextPage.textColor }}>
+        <div className="flex justify-between items-start">
+          <span style={{ fontSize: "0.6rem", letterSpacing: "0.2em", opacity: 0.3, textTransform: "uppercase" }}>{nextPage.chapter}</span>
+          <span style={{ fontSize: "0.6rem", letterSpacing: "0.2em", opacity: 0.3, textTransform: "uppercase", color: nextPage.accent }}>SDG Focus</span>
+        </div>
+        
+        <div className="flex-1 flex flex-col justify-center items-center text-center px-4">
+          <div style={{ width: 56, height: 56, opacity: 0.25, marginBottom: 24 }}>
+            <PageVisual type={nextPage.visual} accent={nextPage.accent} />
+          </div>
+          <h3 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1.3rem", fontWeight: 400, letterSpacing: "0.05em", color: nextPage.textColor, opacity: 0.8, marginBottom: 8 }}>
+            Key Perspective
+          </h3>
+          <div style={{ width: 20, height: 1, background: nextPage.accent, marginBottom: 16 }} />
+          <p style={{ fontFamily: "'EB Garamond', Georgia, serif", fontSize: "0.8rem", lineHeight: 1.6, opacity: 0.55, fontStyle: "italic" }}>
+            "{getChapterQuote(nextPage.chapter)}"
+          </p>
+        </div>
+
+        <div className="flex justify-between items-end">
+          <div style={{ height: 1, width: 24, opacity: 0.15, background: nextPage.textColor }} />
+          <span style={{ fontSize: "0.65rem", opacity: 0.3, fontFamily: "Georgia, serif" }}>{pageNum}</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (nextPage.type === "end") {
+    // Left page for End page
+    return (
+      <div className="absolute inset-0 flex flex-col justify-between p-12"
+        style={{ background: nextPage.bg, color: nextPage.textColor }}>
+        <div className="flex justify-between items-start">
+          <span style={{ fontSize: "0.6rem", letterSpacing: "0.2em", opacity: 0.3, textTransform: "uppercase" }}>Epilogue</span>
+          <span style={{ fontSize: "0.6rem", letterSpacing: "0.2em", opacity: 0.3 }}>VOL. I</span>
+        </div>
+        <div className="flex-1 flex flex-col justify-center items-center text-center">
+          <div style={{ width: 48, height: 48, marginBottom: 20, opacity: 0.25 }}>
+            <IISPPRLogo size={0.6} color={nextPage.accent} compact />
+          </div>
+          <p style={{ fontFamily: "'EB Garamond', Georgia, serif", fontSize: "0.8rem", lineHeight: 1.6, opacity: 0.5, maxWidth: "180px" }}>
+            Shaping public policy through empirical evidence and collaborative research for a better tomorrow.
+          </p>
+        </div>
+        <div className="flex justify-between items-end">
+          <div style={{ height: 1, width: 24, opacity: 0.15, background: nextPage.textColor }} />
+          <span style={{ fontSize: "0.65rem", opacity: 0.3, fontFamily: "Georgia, serif" }}>{pageNum}</span>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}
+
 export default function Page({ page, style, zIndex, logoLanded }) {
-  const content = () => {
+  const nextPage = PAGES[page.id + 1];
+
+  const renderFrontContent = () => {
     if (page.type === "cover") return <CoverPage page={page} logoLanded={logoLanded} />;
     if (page.type === "intro") return <IntroPage page={page} />;
     if (page.type === "content") return <ContentPage page={page} />;
@@ -214,14 +339,43 @@ export default function Page({ page, style, zIndex, logoLanded }) {
       ...style,
       zIndex,
       transformOrigin: "left center",
-      borderRadius: "2px",
-      boxShadow: "4px 0 20px rgba(0,0,0,0.25), 1px 0 4px rgba(0,0,0,0.15)",
-      overflow: "hidden",
+      transformStyle: "preserve-3d",
+      overflow: "visible",
       willChange: "transform, opacity",
     }}>
-      {content()}
-      <div className="absolute inset-y-0 left-0 w-4 pointer-events-none"
-        style={{ background: "linear-gradient(to right, rgba(0,0,0,0.12) 0%, transparent 100%)", zIndex: 10 }} />
+      {/* Front Face (visible on the right) */}
+      <div style={{
+        position: "absolute",
+        inset: 0,
+        backfaceVisibility: "hidden",
+        WebkitBackfaceVisibility: "hidden",
+        transform: "rotateY(0deg)",
+        zIndex: 2,
+        borderRadius: "2px",
+        boxShadow: "4px 0 20px rgba(0,0,0,0.25), 1px 0 4px rgba(0,0,0,0.15)",
+        overflow: "hidden",
+      }}>
+        {renderFrontContent()}
+        <div className="absolute inset-y-0 left-0 w-4 pointer-events-none"
+          style={{ background: "linear-gradient(to right, rgba(0,0,0,0.12) 0%, transparent 100%)", zIndex: 10 }} />
+      </div>
+
+      {/* Back Face (visible on the left when page is flipped) */}
+      <div style={{
+        position: "absolute",
+        inset: 0,
+        backfaceVisibility: "hidden",
+        WebkitBackfaceVisibility: "hidden",
+        transform: "rotateY(180deg)",
+        zIndex: 1,
+        borderRadius: "2px",
+        boxShadow: "-4px 0 20px rgba(0,0,0,0.25), -1px 0 4px rgba(0,0,0,0.15)",
+        overflow: "hidden",
+      }}>
+        <LeftPageContent currentPage={page} nextPage={nextPage} />
+        <div className="absolute inset-y-0 right-0 w-4 pointer-events-none"
+          style={{ background: "linear-gradient(to left, rgba(0,0,0,0.12) 0%, transparent 100%)", zIndex: 10 }} />
+      </div>
     </div>
   );
 }
