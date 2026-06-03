@@ -4,7 +4,8 @@ export default function HeroSection({
   logoRef,
   heroContentOpacity,
   easedProgress,
-  transitionProgress
+  transitionProgress,
+  scrollToPage
 }) {
   return (
     <section
@@ -106,31 +107,37 @@ export default function HeroSection({
         </p>
 
         <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-          <button style={{
-            fontFamily: "Georgia, serif",
-            fontSize: "0.72rem",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            padding: "14px 36px",
-            background: "#C8A96E",
-            color: "#0a0806",
-            border: "none",
-            cursor: "pointer",
-            fontWeight: 600,
-          }}>
+          <button 
+            onClick={() => scrollToPage && scrollToPage(0)}
+            style={{
+              fontFamily: "Georgia, serif",
+              fontSize: "0.72rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              padding: "14px 36px",
+              background: "#C8A96E",
+              color: "#0a0806",
+              border: "none",
+              cursor: "pointer",
+              fontWeight: 600,
+            }}
+          >
             Explore Research
           </button>
-          <button style={{
-            fontFamily: "Georgia, serif",
-            fontSize: "0.72rem",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            padding: "14px 36px",
-            background: "transparent",
-            color: "#C8A96E",
-            border: "1px solid rgba(200,169,110,0.4)",
-            cursor: "pointer",
-          }}>
+          <button 
+            onClick={() => scrollToPage && scrollToPage(0)}
+            style={{
+              fontFamily: "Georgia, serif",
+              fontSize: "0.72rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              padding: "14px 36px",
+              background: "transparent",
+              color: "#C8A96E",
+              border: "1px solid rgba(200,169,110,0.4)",
+              cursor: "pointer",
+            }}
+          >
             Our Publications
           </button>
         </div>

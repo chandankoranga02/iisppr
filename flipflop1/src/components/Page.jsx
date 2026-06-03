@@ -323,7 +323,7 @@ function LeftPageContent({ currentPage, nextPage }) {
   return null;
 }
 
-export default function Page({ page, style, zIndex, logoLanded }) {
+export default function Page({ page, style, zIndex, logoLanded, onClick, cursor }) {
   const nextPage = PAGES[page.id + 1];
 
   const renderFrontContent = () => {
@@ -335,13 +335,14 @@ export default function Page({ page, style, zIndex, logoLanded }) {
   };
 
   return (
-    <div className="absolute inset-0" style={{
+    <div className="absolute inset-0" onClick={onClick} style={{
       ...style,
       zIndex,
       transformOrigin: "left center",
       transformStyle: "preserve-3d",
       overflow: "visible",
       willChange: "transform, opacity",
+      cursor: cursor || "default",
     }}>
       {/* Front Face (visible on the right) */}
       <div style={{

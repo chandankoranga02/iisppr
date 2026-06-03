@@ -3,8 +3,9 @@ import Page from "./Page";
 import ScrollProgress from "./ScrollProgress";
 import { PAGES } from "../data/bookContent";
 import { useBookScroll } from "../hooks/useBookScroll";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function Book({ scrollY, viewportH, logoLanded, easedProgress }) {
+export default function Book({ scrollY, viewportH, logoLanded, easedProgress, scrollToPage }) {
   const totalPages = PAGES.length;
   
   const {
@@ -99,19 +100,56 @@ export default function Book({ scrollY, viewportH, logoLanded, easedProgress }) 
               ))}
             </div>
 
-            {PAGES.map((page, index) => (
-              <Page
-                key={page.id}
-                page={page}
-                style={getPageStyle(index)}
-                zIndex={index === currentPageIndex ? 10 : 5}
-                logoLanded={logoLanded}
-              />
-            ))}
+            {PAGES.map((page, index) => {
+              const isActive = index === currentPageIndex;
+              const isPrev = index === currentPageIndex - 1;
+              const pageClick = () => {
+                if (isActive && index < totalPages - 1) {
+                  scrollToPage && scrollToPage(index + 1);
+                } else if (isPrev) {
+                  scrollToPage && scrollToPage(index);
+                }
+              };
+              const pageCursor = (isActive && index < totalPages - 1) || isPrev ? "pointer" : "default";
+
+              return (
+                <Page
+                  key={page.id}
+                  page={page}
+                  style={getPageStyle(index)}
+                  zIndex={isActive ? 10 : 5}
+                  logoLanded={logoLanded}
+                  onClick={pageClick}
+                  cursor={pageCursor}
+                />
+              );
+            })}
           </div>
 
+          {/* Left/Prev Page Button */}
+          {currentPageIndex > 0 && (
+            <button
+              onClick={() => scrollToPage && scrollToPage(currentPageIndex - 1)}
+              className="nav-turn-btn nav-turn-btn-prev"
+              aria-label="Previous Page"
+            >
+              <ChevronLeft size={20} strokeWidth={1.8} />
+            </button>
+          )}
+
+          {/* Right/Next Page Button */}
+          {currentPageIndex < totalPages - 1 && (
+            <button
+              onClick={() => scrollToPage && scrollToPage(currentPageIndex + 1)}
+              className="nav-turn-btn nav-turn-btn-next"
+              aria-label="Next Page"
+            >
+              <ChevronRight size={20} strokeWidth={1.8} />
+            </button>
+          )}
+
           {/* Progress dots */}
-          <ScrollProgress progressDots={progressDots} pages={PAGES} />
+          <ScrollProgress progressDots={progressDots} pages={PAGES} scrollToPage={scrollToPage} />
 
           <div style={{
             position: "absolute",

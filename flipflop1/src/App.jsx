@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import HeroSection from "./components/HeroSection";
 import FloatingLogo from "./components/FloatingLogo";
 import Book from "./components/Book";
@@ -8,6 +8,7 @@ export default function IISPPRLanding() {
   const [scrollY, setScrollY] = useState(0);
   const [viewportH, setViewportH] = useState(800);
   const [mounted, setMounted] = useState(false);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     const link = document.createElement("link");
@@ -26,6 +27,21 @@ export default function IISPPRLanding() {
     setScrollY(e.target.scrollTop);
   }, []);
 
+  const scrollToPage = useCallback((index) => {
+    if (containerRef.current) {
+      let targetScrollY = 0;
+      if (index >= 0) {
+        // Book scroll starts at viewportH.
+        // Each page index i is fully open at (i + 1) * viewportH.
+        targetScrollY = (index + 1) * viewportH;
+      }
+      containerRef.current.scrollTo({
+        top: targetScrollY,
+        behavior: "smooth",
+      });
+    }
+  }, [viewportH]);
+
   const {
     logoRef,
     logoScale,
@@ -42,6 +58,7 @@ export default function IISPPRLanding() {
 
   return (
     <div
+      ref={containerRef}
       style={{
         width: "100%",
         height: "100vh",
@@ -75,6 +92,7 @@ export default function IISPPRLanding() {
         heroContentOpacity={heroContentOpacity}
         easedProgress={easedProgress}
         transitionProgress={transitionProgress}
+        scrollToPage={scrollToPage}
       />
 
       {/* ANIMATED FLOATING LOGO */}
@@ -95,7 +113,9 @@ export default function IISPPRLanding() {
         viewportH={viewportH}
         logoLanded={logoLanded}
         easedProgress={easedProgress}
+        scrollToPage={scrollToPage}
       />
     </div>
   );
 }
+
