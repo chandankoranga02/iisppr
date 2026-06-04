@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-
 import { Menu, X } from "lucide-react";
 import { D, ease } from "../styles/theme";
 import { NAV_LINKS } from "../data/constants";
+import IISPPRLogo from "./IISPPRLogo";
 
 // Navbar component with pill-shaped floating glassmorphism
 export function Navbar() {
@@ -46,18 +47,18 @@ export function Navbar() {
           className="navbar-container"
         >
           {/* Logo block */}
-          <div style={{ display: "flex", alignItems: "center", gap: 9, marginRight: 22, paddingRight: 22, borderRight: `1px solid ${D.ln1}` }}>
-            <div style={{
-              width: 30, height: 30, borderRadius: 9,
-              background: `linear-gradient(135deg, ${D.gold} 0%, ${D.goldBr} 100%)`,
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: 11, fontWeight: 900, color: "#09090b",
-              fontFamily: D.sans, letterSpacing: "-0.2px",
-            }}>II</div>
-            <span style={{
-              fontSize: 13, fontWeight: 700, color: D.t0,
-              fontFamily: D.sans, letterSpacing: "-0.2px",
-            }}>IISPPR</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginRight: 22, paddingRight: 22, borderRight: `1px solid ${D.ln1}` }}>
+            <IISPPRLogo size={0.5} compact={true} />
+            <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.15 }}>
+              <span style={{
+                fontSize: 14, fontWeight: 800, color: D.t0,
+                fontFamily: D.sans, letterSpacing: "0.5px",
+              }}>IISPPR</span>
+              <span style={{
+                fontSize: 8, fontWeight: 700, color: "#38bdf8",
+                fontFamily: D.sans, letterSpacing: "0.8px",
+              }}>ACADEMY</span>
+            </div>
           </div>
 
           {/* Desktop navigation links */}
