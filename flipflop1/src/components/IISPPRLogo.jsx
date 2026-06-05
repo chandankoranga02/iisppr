@@ -2,12 +2,15 @@ import React from "react";
 
 export default function IISPPRLogo({ size = 1, color = "#f5f0e8", compact = false }) {
   const s = size;
+  const dimension = compact ? 60 * s : 80 * s;
   return (
     <svg
       viewBox="0 0 120 120"
+      width={dimension}
+      height={dimension}
       style={{
-        width: compact ? 60 * s : 80 * s,
-        height: compact ? 60 * s : 80 * s,
+        width: `${dimension}px`,
+        height: `${dimension}px`,
         display: "block",
       }}
     >
