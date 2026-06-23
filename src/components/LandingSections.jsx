@@ -3,19 +3,25 @@ import { motion } from "framer-motion";
 import {
   ArrowRight, Star, Users, Award,
   Shield, TrendingUp, Lightbulb,
-  GraduationCap,
+  GraduationCap, Brain, BarChart3,
+  Globe2, Puzzle, MessageSquare, Trophy,
 } from "lucide-react";
 
 import './courseDifferent/styles/global.css';
 import './courseDifferent/styles/LandingSections.css';
 import './courseDifferent/styles/CourseDifferentPage.css';
-
+import critical from "../assets/critical.png";
+import data from '../assets/data.png';
+import global from '../assets/global.png';
+import problem from '../assets/problem.png';
+import communication from '../assets/communication.png';
+import real from '../assets/real.png';
 
 /* ─── Image assets ─── */
-import brainImg  from '../assets/brain.png';
+import brainImg    from '../assets/brain.png';
 import computerImg from '../assets/computer.png';
-import earthImg  from '../assets/earth.png';
-import masterImg from '../assets/master.png';
+import earthImg    from '../assets/earth.png';
+import masterImg   from '../assets/master.png';
 
 /* ─── Framer Motion helpers ─── */
 const fadeUp = {
@@ -35,10 +41,10 @@ const fadeIn = {
 
 /* ─── Data ─── */
 const STATS = [
-  { num: "2,000+",  label: "Students Enrolled",     icon: Users,       accent: "#e8a020" },
-  { num: "96%",     label: "Completion Rate",        icon: TrendingUp,  accent: "#f5c518" },
-  { num: "12+",     label: "Expert Instructors",     icon: Award,       accent: "#00d4c8" },
-  { num: "4.9 ★",  label: "Average Rating",         icon: Star,        accent: "#bf7aff" },
+  { num: "2,000+", label: "Students Enrolled",  icon: Users,      accent: "#e8a020" },
+  { num: "96%",    label: "Completion Rate",     icon: TrendingUp, accent: "#f5c518" },
+  { num: "12+",    label: "Expert Instructors",  icon: Award,      accent: "#00d4c8" },
+  { num: "4.9 ★", label: "Average Rating",      icon: Star,       accent: "#bf7aff" },
 ];
 
 const AUDIENCE = [
@@ -65,55 +71,325 @@ const AUDIENCE = [
   },
 ];
 
-
 const MODULES = [
   {
+    num: "01",
     week: "Module 01",
     title: "Foundations of Critical Thinking",
-    desc: "Master the art of structured reasoning, logical analysis, and evidence-based decision making.",
+    desc: "Learn to break down problems, evaluate arguments, and think with clarity.",
     topics: ["Logic & Fallacies", "Mental Models", "Bayesian Thinking"],
     accent: "#e8a020",
+    icon: Brain,
+    image: critical,
   },
   {
+    num: "02",
     week: "Module 02",
     title: "Data Literacy & Interpretation",
-    desc: "Understand data at a deep level — spot trends, detect biases, and draw accurate conclusions.",
+    desc: "Make sense of data and turn numbers into real-world insights.",
     topics: ["Statistics Basics", "Visual Data", "Bias Detection"],
     accent: "#f5c518",
+    icon: BarChart3,
+    image: data,
   },
   {
+    num: "03",
     week: "Module 03",
     title: "Global Trends & Local Impact",
-    desc: "Connect macro-level global trends to micro-level decisions affecting your daily life and career.",
+    desc: "Explore global shifts and understand their real impact on communities.",
     topics: ["Economics", "Technology Trends", "Policy Analysis"],
     accent: "#00d4c8",
+    icon: Globe2,
+    image: global,
   },
   {
+    num: "04",
     week: "Module 04",
     title: "Problem Solving Frameworks",
-    desc: "Apply industry-tested frameworks like First Principles, MECE, and Design Thinking.",
+    desc: "Use proven frameworks to solve complex problems with confidence.",
     topics: ["First Principles", "MECE", "Design Thinking"],
     accent: "#bf7aff",
+    icon: Puzzle,
+    image: problem,
   },
   {
+    num: "05",
     week: "Module 05",
     title: "Communication & Storytelling",
-    desc: "Turn complex insights into compelling narratives that influence and inspire action.",
+    desc: "Communicate ideas clearly and tell stories that inspire action.",
     topics: ["Data Storytelling", "Presentation Skills", "Executive Communication"],
-    accent: "#e8a020",
+    accent: "#ff6b4a",
+    icon: MessageSquare,
+    image: communication,
   },
   {
+    num: "06",
     week: "Module 06",
     title: "Capstone & Real-World Project",
-    desc: "Apply everything to a real-world problem — research, analyse, and present your findings.",
+    desc: "Apply everything you've learned in a project that builds your portfolio.",
     topics: ["Industry Project", "Peer Review", "Expert Feedback"],
-    accent: "#f5c518",
+    accent: "#3ddc84",
+    icon: Trophy,
+    image: real,
   },
 ];
 
+/* ─── Styles ─── */
+const PageStyles = () => (
+  <style>{`
+    /* Section backgrounds */
+    .stats-section,
+    .audience-section,
+    .curriculum-section,
+    .final-cta-section {
+      background: #000 !important;
+    }
 
+    /* ── Curriculum grid ── */
+    .curriculum-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 900px) {
+      .curriculum-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 580px) {
+      .curriculum-grid { grid-template-columns: 1fr; }
+    }
 
+    /* ── Flip card shell ── */
+    .flip-card {
+      perspective: 1400px;
+      height: 420px;
+      cursor: pointer;
+    }
 
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner,
+    .flip-card:focus-within .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* ── Shared face rules ── */
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 18px;
+      overflow: hidden;
+      box-sizing: border-box;
+      border: 1px solid var(--c-border);
+    }
+
+    /* ══════════════════════════════
+       FRONT FACE
+       Layout (top→bottom):
+         [image ~55%]
+         [content area ~45%]
+           row1: icon-box | module-label | number-badge
+           row2: title
+           row3: short desc
+    ══════════════════════════════ */
+    .flip-card-front {
+      display: flex;
+      flex-direction: column;
+      background: #07070a;
+    }
+
+    /* Image — top 55% of card */
+    .fcard__img {
+      width: 100%;
+      height: 55%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      flex-shrink: 0;
+      border-radius: 18px 18px 0 0;
+      filter: brightness(0.85) saturate(1.15);
+    }
+
+    /* Content zone — bottom 45% */
+    .fcard__body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 14px 18px 18px;
+      background:
+        radial-gradient(circle at 0% 0%, var(--c-glow), transparent 70%),
+        #07070a;
+      position: relative;
+    }
+
+    /* Row 1: icon  |  module label + number */
+    .fcard__meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .fcard__left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .fcard__icon-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1.5px solid var(--c-accent);
+      background: rgba(255,255,255,0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .fcard__module-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+      line-height: 1.2;
+    }
+
+    /* Number badge — top-right */
+    .fcard__num-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1.5px solid var(--c-accent);
+      background: rgba(255,255,255,0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--c-accent);
+      flex-shrink: 0;
+    }
+
+    /* Row 2: title */
+    .fcard__title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    /* Row 3: short description */
+    .fcard__desc {
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* ══════════════════════════════
+       BACK FACE — topics + full desc
+    ══════════════════════════════ */
+    .flip-card-back {
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+      padding: 32px 28px;
+      background:
+        radial-gradient(circle at 85% 100%, var(--c-glow), transparent 65%),
+        #0c0c10;
+    }
+
+    .bcard__header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .bcard__icon-box {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      border: 1.5px solid var(--c-accent);
+      background: rgba(255,255,255,0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .bcard__label-group {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .bcard__module-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+    }
+
+    .bcard__title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.25;
+    }
+
+    .bcard__divider {
+      height: 1px;
+      background: var(--c-border);
+    }
+
+    .bcard__desc {
+      font-size: 13.5px;
+      color: #c8c8c8;
+      line-height: 1.6;
+    }
+
+    .bcard__topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .bcard__topic {
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--c-accent);
+      color: var(--c-accent);
+      background: rgba(255,255,255,0.04);
+      letter-spacing: 0.02em;
+    }
+
+    .bcard__hint {
+      font-size: 11px;
+      color: #555;
+      text-align: center;
+      margin-top: auto;
+      letter-spacing: 0.04em;
+    }
+  `}</style>
+);
 
 /* ════════════════════════════════════════════════════════
    MAIN COMPONENT
@@ -121,8 +397,9 @@ const MODULES = [
 export default function LandingSections() {
   return (
     <>
+      <PageStyles />
 
-      {/* ── STATS ────────────────────────────────────────── */}
+      {/* ── STATS ─────────────────────────────────────── */}
       <section className="stats-section" id="stats" aria-label="Course statistics">
         <div className="stats-inner">
           <div className="stats-grid">
@@ -148,10 +425,9 @@ export default function LandingSections() {
         </div>
       </section>
 
-      {/* ── WHO IS THIS FOR ──────────────────────────────── */}
+      {/* ── WHO IS THIS FOR ───────────────────────────── */}
       <section className="audience-section" id="whyus" aria-label="Who is this for">
         <div className="audience-inner">
-
           <motion.div
             className="audience__left"
             initial="hidden"
@@ -196,9 +472,6 @@ export default function LandingSections() {
             variants={fadeIn}
             custom={0.3}
           >
-
-
-            {/* Photo grid replacing emoji cards */}
             <div className="audience-photo-grid">
               <motion.div className="audience-photo-card audience-photo-card--wide"
                 whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 250 }}>
@@ -208,7 +481,6 @@ export default function LandingSections() {
                   <p>Industry-first approach</p>
                 </div>
               </motion.div>
-
               <motion.div className="audience-photo-card"
                 whileHover={{ scale: 1.03 }} transition={{ type: "spring", stiffness: 250 }}>
                 <img src={brainImg} alt="Critical thinking brain" className="audience-photo-img" />
@@ -217,7 +489,6 @@ export default function LandingSections() {
                   <p>6 core modules</p>
                 </div>
               </motion.div>
-
               <motion.div className="audience-photo-card"
                 whileHover={{ scale: 1.03 }} transition={{ type: "spring", stiffness: 250 }}>
                 <img src={computerImg} alt="Hands-on learning" className="audience-photo-img" />
@@ -226,7 +497,6 @@ export default function LandingSections() {
                   <p>Real datasets</p>
                 </div>
               </motion.div>
-
               <motion.div className="audience-photo-card audience-photo-card--wide"
                 whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 250 }}>
                 <img src={earthImg} alt="Global perspective" className="audience-photo-img" />
@@ -237,11 +507,10 @@ export default function LandingSections() {
               </motion.div>
             </div>
           </motion.div>
-
         </div>
       </section>
 
-      {/* ── CURRICULUM ───────────────────────────────────── */}
+      {/* ── CURRICULUM ────────────────────────────────── */}
       <section className="curriculum-section" id="curriculum" aria-label="Course curriculum">
         <div className="curriculum-inner">
           <motion.div
@@ -257,29 +526,87 @@ export default function LandingSections() {
             </h2>
             <p className="section-desc" style={{ textAlign: "center", margin: "14px auto 0", maxWidth: 520 }}>
               Every module is designed to challenge you, build on the last, and leave you with
-              a tangible, portfolio-ready skill.
+              a tangible, portfolio-ready skill. <em>Hover a card to explore.</em>
             </p>
           </motion.div>
 
           <div className="curriculum-grid">
-            {MODULES.map(({ week, title, desc, topics, accent }, i) => (
+            {MODULES.map(({ num, week, title, desc, topics, accent, icon: Icon, image }, i) => (
               <motion.div
                 key={week}
-                className="curriculum-card"
-                style={{ "--c-accent": accent }}
+                className="flip-card"
+                style={{
+                  "--c-accent": accent,
+                  "--c-glow":   `${accent}28`,
+                  "--c-border": `${accent}45`,
+                }}
                 custom={i * 0.08}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.15 }}
                 variants={fadeUp}
+                tabIndex={0}
+                aria-label={`${week}: ${title}`}
               >
-                <div className="curriculum-card__week">{week}</div>
-                <div className="curriculum-card__title">{title}</div>
-                <div className="curriculum-card__desc">{desc}</div>
-                <div className="curriculum-card__topics">
-                  {topics.map((t) => (
-                    <span key={t} className="curriculum-card__topic">{t}</span>
-                  ))}
+                <div className="flip-card-inner">
+
+                  {/* ── FRONT ── */}
+                  <div className="flip-card-front">
+                    {/* Image — top portion */}
+                    <img
+                      src={image}
+                      alt=""
+                      aria-hidden="true"
+                      className="fcard__img"
+                    />
+
+                    {/* Content zone */}
+                    <div className="fcard__body">
+                      {/* Row 1: icon + module label | number badge */}
+                      <div className="fcard__meta">
+                        <div className="fcard__left">
+                          <div className="fcard__icon-box">
+                            <Icon size={20} color={accent} />
+                          </div>
+                          <span className="fcard__module-label">{week}</span>
+                        </div>
+                        <div className="fcard__num-badge">{num}</div>
+                      </div>
+
+                      {/* Row 2: title */}
+                      <p className="fcard__title">{title}</p>
+
+                      {/* Row 3: short description */}
+                      <p className="fcard__desc">{desc}</p>
+                    </div>
+                  </div>
+
+                  {/* ── BACK ── */}
+                  <div className="flip-card-back">
+                    {/* Header: icon + module + title */}
+                    <div className="bcard__header">
+                      <div className="bcard__icon-box">
+                        <Icon size={22} color={accent} />
+                      </div>
+                      <div className="bcard__label-group">
+                        <span className="bcard__module-label">{week}</span>
+                        <span className="bcard__title">{title}</span>
+                      </div>
+                    </div>
+
+                    <div className="bcard__divider" />
+
+                    {/* Full description */}
+                    <p className="bcard__desc">{desc}</p>
+
+                    {/* Topic pills */}
+                    <div className="bcard__topics">
+                      {topics.map((t) => (
+                        <span key={t} className="bcard__topic">{t}</span>
+                      ))}
+                    </div>
+                  </div>
+
                 </div>
               </motion.div>
             ))}
@@ -287,14 +614,7 @@ export default function LandingSections() {
         </div>
       </section>
 
-
-
-
-
-      {/* ── FAQ ──────────────────────────────────────────── */}
-
-
-      {/* ── FINAL CTA ────────────────────────────────────── */}
+      {/* ── FINAL CTA ─────────────────────────────────── */}
       <section className="final-cta-section" aria-label="Enrol call to action">
         <motion.div
           className="final-cta-inner"
