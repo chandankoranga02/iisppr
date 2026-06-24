@@ -1,0 +1,80 @@
+import React from "react";
+
+export default function IISPPRLogo({ size = 1, color = "#f5f0e8", compact = false }) {
+  const s = size;
+  const dimension = compact ? 60 * s : 80 * s;
+  return (
+    <svg
+      viewBox="0 0 120 120"
+      width={dimension}
+      height={dimension}
+      style={{
+        width: `${dimension}px`,
+        height: `${dimension}px`,
+        display: "block",
+      }}
+    >
+      <defs>
+        {/* Arc path for the arched text */}
+        <path id="logo-text-path" d="M 24,64 A 36,36 0 0,1 96,64" fill="none" />
+        {/* Clip path to keep continent lines inside the globe */}
+        <clipPath id="globe-clip">
+          <circle cx="60" cy="68" r="22.75" />
+        </clipPath>
+      </defs>
+
+      {/* Laurel Wreath in green */}
+      <g stroke="#82c341" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.9">
+        {/* Stems (Crossed smoothly at the bottom) */}
+        <path d="M 34,40 C 30,45 26,55 26,65 C 26,90 40,105 60,105 C 61.2,105 62.4,105.5 63.5,106.5" strokeWidth="1.2" />
+        <path d="M 86,40 C 90,45 94,55 94,65 C 94,90 80,105 60,105 C 58.8,105 57.6,105.5 56.5,106.5" strokeWidth="1.2" />
+      </g>
+
+      {/* Laurel Leaves (Filled green) */}
+      <g fill="#82c341" opacity="0.95">
+        {/* Left leaves */}
+        <path d="M 34,40 C 32,38 31,32 34,30 C 36,32 37,38 34,40 Z" />
+        <path d="M 29,48 C 26,46 25,41 28,38 C 30,40 31,46 29,48 Z" />
+        <path d="M 26,57 C 23,55 22,50 25,47 C 27,49 28,55 26,57 Z" />
+        <path d="M 25,67 C 22,66 21,60 24,57 C 26,59 27,65 25,67 Z" />
+        <path d="M 26,77 C 23,77 22,71 25,68 C 27,70 28,76 26,77 Z" />
+        <path d="M 29,86 C 26,88 25,82 28,79 C 30,81 31,86 29,86 Z" />
+        <path d="M 35,94 C 32,97 30,92 33,88 C 35,90 37,94 35,94 Z" />
+        <path d="M 43,100 C 40,103 37,99 40,95 C 42,97 44,100 43,100 Z" />
+        <path d="M 52,104 C 50,106 46,103 49,99 C 51,101 53,104 52,104 Z" />
+
+        {/* Right leaves */}
+        <path d="M 86,40 C 88,38 89,32 86,30 C 84,32 83,38 86,40 Z" />
+        <path d="M 91,48 C 94,46 95,41 92,38 C 90,40 89,46 91,48 Z" />
+        <path d="M 94,57 C 97,55 98,50 95,47 C 93,49 92,55 94,57 Z" />
+        <path d="M 95,67 C 98,66 99,60 96,57 C 94,59 93,65 95,67 Z" />
+        <path d="M 94,77 C 97,77 98,71 95,68 C 93,70 92,76 94,77 Z" />
+        <path d="M 91,86 C 94,88 95,82 92,79 C 90,81 89,86 91,86 Z" />
+        <path d="M 85,94 C 88,97 90,92 87,88 C 85,90 83,94 85,94 Z" />
+        <path d="M 77,100 C 80,103 83,99 80,95 C 78,97 76,100 77,100 Z" />
+        <path d="M 68,104 C 70,106 74,103 71,99 C 69,101 67,104 68,104 Z" />
+      </g>
+
+      {/* Central Blue Globe */}
+      <g>
+        {/* Globe outer circle */}
+        <circle cx="60" cy="68" r="24" fill="#0f0c08" stroke="#38bdf8" strokeWidth="2.5" />
+        
+        {/* Continent Lines (Clipped inside the globe) */}
+        <g clipPath="url(#globe-clip)" stroke="#38bdf8" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.95">
+          <path d="M 44,56 C 47,54 50,56 52,52 C 54,48 50,46 54,46 C 58,46 60,50 63,48 C 65,46 62,44 60,44 C 58,44 56,42 58,40" />
+          <path d="M 52,68 C 48,68 44,72 44,76 C 44,80 48,84 52,86 C 56,88 56,92 60,92" />
+          <path d="M 64,60 C 68,60 70,64 74,62 C 78,60 76,56 78,54 C 80,52 82,56 80,60 C 78,64 74,68 76,72 C 78,76 82,74 84,78 C 86,82 82,88 78,88 C 74,88 72,82 68,82 C 64,82 64,74 60,74" />
+          <circle cx="72" cy="51" r="1" fill="#38bdf8" stroke="none" />
+        </g>
+      </g>
+
+      {/* Curved Text along path */}
+      <text fontFamily="'Playfair Display', Georgia, serif" fontSize="7.2" fontWeight="600" fill={color}>
+        <textPath href="#logo-text-path" startOffset="50%" textAnchor="middle">
+          • Edify Execute Effectuate •
+        </textPath>
+      </text>
+    </svg>
+  );
+}
