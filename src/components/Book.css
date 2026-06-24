@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300&family=EB+Garamond:ital,wght@0,400;1,400&family=Cormorant+Garamond:wght@300;400;600&display=swap');
+
+:root {
+  --color-gold: #dfc27d;
+  --color-gold-bright: #f5e3b5;
+  --color-copper: #c58f62;
+  --color-dark-velvet: #080b11;
+  
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Outfit', system-ui, sans-serif;
+}
+
+/* Custom 3D & Utility Classes */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Luxury Typography Utilities */
+.font-editorial {
+  font-family: var(--font-serif);
+}
+
+.font-display {
+  font-family: var(--font-sans);
+}
+
+/* Realistic Paper Grain Texture (GPU Accelerated repeating inline SVG) */
+.paper-texture {
+  position: relative;
+}
+
+.paper-texture::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  z-index: 5;
+}
+
+/* Realistic page folding crease shadows for Right Page */
+.page-crease-right {
+  background: linear-gradient(to right, 
+    rgba(0, 0, 0, 0.45) 0%, 
+    rgba(0, 0, 0, 0.15) 3%, 
+    rgba(0, 0, 0, 0.04) 8%, 
+    rgba(0, 0, 0, 0.01) 15%, 
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.03) 95%, 
+    rgba(0, 0, 0, 0.08) 100%
+  );
+}
+
+/* Realistic page folding crease shadows for Left Page */
+.page-crease-left {
+  background: linear-gradient(to left, 
+    rgba(0, 0, 0, 0.45) 0%, 
+    rgba(0, 0, 0, 0.15) 3%, 
+    rgba(0, 0, 0, 0.04) 8%, 
+    rgba(0, 0, 0, 0.01) 15%, 
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.03) 95%, 
+    rgba(0, 0, 0, 0.08) 100%
+  );
+}
+
+/* Spine shadow projection on pages */
+.spine-groove-right {
+  box-shadow: inset 12px 0 20px -8px rgba(0, 0, 0, 0.7);
+}
+
+.spine-groove-left {
+  box-shadow: inset -12px 0 20px -8px rgba(0, 0, 0, 0.7);
+}
+
+/* Custom shadow setups */
+.shadow-book-3d {
+  box-shadow: 
+    0 15px 40px -10px rgba(0, 0, 0, 0.8),
+    0 30px 70px -15px rgba(0, 0, 0, 0.9),
+    0 0 100px -20px rgba(56, 189, 248, 0.05);
+}
+
+.shadow-page-3d {
+  box-shadow: 
+    0 10px 30px -5px rgba(0, 0, 0, 0.5),
+    inset 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* Specular gold sheen */
+.gold-edge-foil {
+  background: linear-gradient(135deg, 
+    var(--color-copper) 0%, 
+    var(--color-gold) 50%, 
+    var(--color-copper) 100%
+  );
+  box-shadow: 0 0 8px rgba(223, 194, 125, 0.4);
+}
+
+/* Page corner lift mask for hover effect */
+.page-corner-lift {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+}
+
+/* Premium Page-Turn Navigation Buttons */
+.nav-turn-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: rgba(15, 12, 8, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(200, 169, 110, 0.25);
+  color: #C8A96E;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 150;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  padding: 0;
+  outline: none;
+}
+
+.nav-turn-btn:hover {
+  background: rgba(200, 169, 110, 0.12);
+  border-color: #dfc27d;
+  color: #f5e3b5;
+  box-shadow: 0 0 20px rgba(200, 169, 110, 0.4), 0 10px 25px rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.nav-turn-btn:active {
+  transform: translateY(-50%) scale(0.95);
+  background: rgba(200, 169, 110, 0.2);
+}
+
+.nav-turn-btn:focus-visible {
+  border-color: #dfc27d;
+  box-shadow: 0 0 0 2px rgba(200, 169, 110, 0.4);
+}
+
+/* Positioning for desktop screens */
+.nav-turn-btn-prev {
+  left: -440px;
+}
+
+.nav-turn-btn-next {
+  right: -60px;
+}
+
+/* Responsive adjustments for tablet and mobile screens */
+@media (max-width: 1024px) {
+  .nav-turn-btn {
+    top: auto;
+    bottom: -48px; /* Perfectly aligned vertically with the progress dots */
+    transform: translateY(50%);
+    width: 38px;
+    height: 38px;
+  }
+  
+  .nav-turn-btn:hover {
+    transform: translateY(50%) scale(1.05);
+  }
+  
+  .nav-turn-btn:active {
+    transform: translateY(50%) scale(0.95);
+  }
+
+  .nav-turn-btn-prev {
+    left: calc(50% - 90px); /* Positioned to the left of progress dots */
+  }
+
+  .nav-turn-btn-next {
+    right: calc(50% - 90px); /* Positioned to the right of progress dots */
+  }
+}
+
+/* 3D Transform and Rendering Context Overrides to prevent flattening */
+section > div[style*="sticky"] {
+  transform-style: preserve-3d !important;
+  overflow: visible !important;
+}
+
+section > div[style*="sticky"] > div[style*="relative"] {
+  transform-style: preserve-3d !important;
+}
+
+/* Disable filter on the parent container which flattens 3D context */
+section > div[style*="sticky"] > div[style*="relative"] > div[style*="absolute"] {
+  transform-style: preserve-3d !important;
+  filter: none !important;
+}
+
+/* Disable filter on Page root container to prevent 3D context flattening & enable clicks */
+section > div[style*="sticky"] > div[style*="relative"] > div[style*="absolute"] > div.absolute.inset-0 {
+  transform-style: preserve-3d !important;
+  filter: none !important;
+  pointer-events: auto !important; /* Enable clicks/taps on the pages */
+}
+
+/* Disable filter on Page Face descendants to prevent 3D context flattening & restore backface-visibility */
+section > div[style*="sticky"] > div[style*="relative"] > div[style*="absolute"] > div.absolute.inset-0 > div {
+  filter: none !important;
+}
+
+/* Scoped spacing/padding compensation to prevent text cutoff near the book spine/gutter */
+section > div[style*="sticky"] .px-10.py-12 {
+  padding-left: 48px !important;
+  padding-right: 48px !important;
+}
+
+section > div[style*="sticky"] .p-12 {
+  padding: 48px !important;
+}
