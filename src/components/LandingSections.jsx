@@ -142,7 +142,7 @@ const PageStyles = () => (
     .audience-section,
     .curriculum-section,
     .final-cta-section {
-      background: #000 !important;
+      background: transparent !important;
     }
 
     /* ── Curriculum grid ── */

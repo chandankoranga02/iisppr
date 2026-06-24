@@ -726,10 +726,9 @@
 .dark-zone {
   position: relative;
   overflow: hidden;
-  /* Navy blue base matching the image: deep dark centre, lighter steel-blue spotlight */
+  /* Navy blue base matching the image: deep dark centre, lighter steel-blue spotlight (semi-transparent) */
   background:
-    radial-gradient(ellipse 75% 55% at 50% 35%, #0d2133 0%, #07111a 55%, #040c12 100%),
-    #040c12;
+    radial-gradient(ellipse 75% 55% at 50% 35%, rgba(13, 33, 51, 0.4) 0%, rgba(7, 17, 26, 0.5) 55%, rgba(4, 12, 18, 0.6) 100%);
 }
 
 /* Subtle dot-grid texture */
