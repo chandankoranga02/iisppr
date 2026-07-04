@@ -68,7 +68,7 @@ export default function Book() {
       ref={sectionRef}
       style={{
         height: `${totalPages * 100}vh`, // 700vh total height scroll track
-        background: "#0a0806",
+        background: "transparent",
         position: "relative",
         zIndex: 2,
       }}
