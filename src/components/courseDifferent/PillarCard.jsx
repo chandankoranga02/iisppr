@@ -93,7 +93,7 @@ function PillarCard({ card, index }) {
 
       {/* Icon */}
       <div className="card__icon-wrap" aria-hidden="true">
-        <Icon size={20} />
+        <Icon size={16} />
       </div>
 
       {/* Text */}

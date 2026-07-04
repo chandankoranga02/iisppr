@@ -35,7 +35,7 @@
   height: auto;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.26;
+  opacity: 0.45;
 }
 
 /* ── Ambient glows — golden planet bloom from bottom, matching reference ── */
@@ -272,6 +272,9 @@
   gap: 14px;
   margin-top: var(--space-2xl);
   justify-content: center;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 1024px) {
